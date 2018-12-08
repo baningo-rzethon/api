@@ -8,7 +8,6 @@
 use app\core\ApiController;
 use app\core\libs\JWT\JWT;
 use app\models\forms\user\LoginForm;
-use app\models\forms\user\RegisterForm;
 
 /**
  * Class Oauth
@@ -41,27 +40,5 @@ class Oauth extends ApiController
         return $this->response(400, [
             'message' => $this->errors
         ]);
-    }
-
-    /**
-     * @return bool
-     * /users/create
-     */
-    public function register()
-    {
-        $model = new RegisterForm($this->request);
-        if ($this->request && !$this->errors = $model->validate()) {
-            if ($model->register()) {
-                return $this->response(200, [
-                    'message' => 'Sukces!'
-                ]);
-            }
-
-            return $this->response(400, [
-                'message' => 'Wystąpił nieoczekiwany błąd!'
-            ]);
-        }
-
-        return $this->response(202, $this->errors);
     }
 }

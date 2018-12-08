@@ -9,6 +9,6 @@ include('db.php');
 
 define('APP_PATH', '../app');
 define('PUBLIC_PATH', '/');
-define('APP_URL', 'http://192.168.1.116');
-define('APP_NAME', 'ASAP framework');
+define('APP_URL', 'http://192.168.43.166');
+define('APP_NAME', 'Rzetour');
 define('API_KEY', '1234567891');

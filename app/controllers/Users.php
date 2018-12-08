@@ -24,7 +24,7 @@ class Users extends ApiController
     public function index()
     {
         if (!$this->onlyForAdmin()) {
-            return $this->response(401, [
+            return $this->response(400, [
                 'message' => 'Wystąpił nieoczekiwany błąd!'
             ]);
         }
@@ -39,12 +39,6 @@ class Users extends ApiController
      */
     public function create()
     {
-        if (!$this->onlyForAdmin()) {
-            return $this->response(401, [
-                'message' => 'Wystąpił nieoczekiwany błąd!'
-            ]);
-        }
-
         $model = new RegisterForm($this->request);
         if ($this->request && !$this->errors = $model->validate()) {
             if ($model->register()) {
@@ -58,7 +52,7 @@ class Users extends ApiController
             ]);
         }
 
-        return $this->response(202, $this->errors);
+        return $this->response(400, $this->errors);
     }
 
     /**
@@ -68,7 +62,7 @@ class Users extends ApiController
     public function update()
     {
         if (!$this->onlyForAdmin()) {
-            return $this->response(401, [
+            return $this->response(400, [
                 'message' => 'Wystąpił nieoczekiwany błąd!'
             ]);
         }
@@ -86,7 +80,7 @@ class Users extends ApiController
             ]);
         }
 
-        return $this->response(202, $this->errors);
+        return $this->response(400, $this->errors);
     }
 
     /**
@@ -96,7 +90,7 @@ class Users extends ApiController
     public function destroy()
     {
         if (!$this->onlyForAdmin()) {
-            return $this->response(401, [
+            return $this->response(400, [
                 'message' => 'Wystąpił nieoczekiwany błąd!'
             ]);
         }
@@ -114,6 +108,6 @@ class Users extends ApiController
             ]);
         }
 
-        return $this->response(202, $this->errors);
+        return $this->response(400, $this->errors);
     }
 }

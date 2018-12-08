@@ -30,7 +30,8 @@ class RegisterForm extends FormModel
         return (new RegisterValidator($this->data, [
             'name',
             'password',
-            'confirm'
+            'confirm',
+            'email'
         ]))->validate()->getErrors();
     }
 

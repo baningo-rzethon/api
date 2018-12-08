@@ -79,5 +79,25 @@ class ApiController extends Controller
 
         return true;
     }
+
+    /**
+     * @return bool
+     */
+    public function onlyForOwner(): bool
+    {
+        if (!$data = $this->getDataIfJwtIsCorrect()) {
+            return false;
+        }
+
+        if (!$userId = $this->request->user_id ?? false) {
+            return false;
+        }
+
+        if ($userId != $data->id) {
+            return false;
+        }
+
+        return true;
+    }
 }
 

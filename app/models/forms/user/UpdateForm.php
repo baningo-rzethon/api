@@ -28,7 +28,7 @@ class UpdateForm extends FormModel
     public function validate(): array
     {
         return (new UpdateUserValidator($this->data, [
-            'id',
+            'user_id',
             'name',
             'password',
             'confirm'
