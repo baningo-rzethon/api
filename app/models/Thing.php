@@ -6,15 +6,15 @@ use app\core\Model;
 use app\core\Database;
 
 /**
- * Class Place
+ * Class Thing
  * @package app\models
  */
-class Place extends Model
+class Thing extends Model
 {
     /**
      * @var string $tableName
      */
-    public $tableName = 'places';
+    public $tableName = 'things';
 
     /**
      * @param string $name
@@ -39,24 +39,13 @@ class Place extends Model
     }
 
     /**
-     * @param int $placeId
+     * @param int $thingId
      * @return Database
      */
-    public function getThingsIds(int $placeId): Database
+    public function getPlacesIds(int $thingId): Database
     {
-        $this->db->query('select thing_id from places_things where place_id = :placeId');
+        $this->db->query('select place_id from places_things where thing_id = :thingId');
 
-        return $this->db->bind(':placeId', $placeId);
-    }
-
-    /**
-     * @param int $placeId
-     * @return Database
-     */
-    public function getCheckInsIds(int $placeId): Database
-    {
-        $this->db->query('select check-in_id from check-ins_places where place_id = :placeId');
-
-        return $this->db->bind(':placeId', $placeId);
+        return $this->db->bind(':thingId', $thingId);
     }
 }

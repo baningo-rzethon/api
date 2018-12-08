@@ -53,4 +53,49 @@ class User extends Model
 
         return $this->db->bind(':id', $id);
     }
+
+    /**
+     * @param int $id
+     * @return Database
+     */
+    public function getThingsIds(int $userId): Database
+    {
+        $this->db->query('select thing_id from users_things where user_id = :userId');
+
+        return $this->db->bind(':userId', $userId);
+    }
+
+    /**
+     * @param int $userId
+     * @return Database
+     */
+    public function getCheckIns(int $userId): Database
+    {
+        $this->db->query('select * from users_check-ins where user_id = :userId');
+
+        return $this->db->bind(':userId', $userId);
+    }
+
+    /**
+     * @param int $userId
+     * @return Database
+     */
+    public function getCheckInsIds(int $userId): Database
+    {
+        $this->db->query('select check-in_id from users_check-ins where user_id = :userId');
+
+        return $this->db->bind(':userId', $userId);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $checkInId
+     * @return Database
+     */
+    public function getCheckInsFrom(int $userId, int $checkInId): Database
+    {
+        $this->db->query('select * from users_check-ins where user_id = :userId, check-in_id  = :checkInId');
+
+        return $this->db->bind(':userId', $userId)->bind(':checkInId', $checkInId);
+    }
 }
