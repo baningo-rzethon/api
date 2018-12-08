@@ -52,7 +52,7 @@ class Request
         $location .= $action ? $action . '/' : null;
         $location .= $params ? $params . '/' : null;
 
-        return header('Location: ' . $location);
+        return header('Location: ' . APP_URL . $location);
     }
 
     /**

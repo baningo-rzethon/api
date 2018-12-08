@@ -98,4 +98,15 @@ class User extends Model
 
         return $this->db->bind(':userId', $userId)->bind(':checkInId', $checkInId);
     }
+
+    /**
+     * @param string $token
+     * @return Database
+     */
+    public function findByToken(string $token): Database
+    {
+        $this->db->query('select * from ' . $this->tableName . ' where token = :token');
+
+        return $this->db->bind(':token', $token);
+    }
 }

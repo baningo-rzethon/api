@@ -33,6 +33,30 @@ class Users extends ApiController
         return $this->response(200, $users);
     }
 
+
+    /**
+     * @return bool|void
+     * /users/getByToken/<token>
+     */
+    public function getByToken(string $token)
+    {
+        if (!$this->onlyForAdmin()) {
+            return $this->response(400, [
+                'message' => 'Wystąpił nieoczekiwany błąd!'
+            ]);
+        }
+
+        if(!$user = (new User())->findByToken($token)->getFirst()){
+            return $this->response(200, [
+                'url' => APP_URL . '/checkin/fail/'
+            ]);
+        }
+
+        return $this->response(200, [
+            'url' => APP_URL . '/checkin/info/'.$token
+        ]);
+    }
+
     /**
      * @return bool
      * /users/create
@@ -82,7 +106,6 @@ class Users extends ApiController
 
         return $this->response(400, $this->errors);
     }
-
 
     /**
      * @return bool
