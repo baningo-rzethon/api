@@ -38,7 +38,7 @@ class Users extends ApiController
      * @return bool|void
      * /users/getByToken/<token>
      */
-    public function getByToken(string $token)
+    public function getByToken(string $token, int $checkInId)
     {
         if (!$this->onlyForAdmin()) {
             return $this->response(400, [
@@ -46,14 +46,20 @@ class Users extends ApiController
             ]);
         }
 
-        if(!$user = (new User())->findByToken($token)->getFirst()){
+        if (!$user = (new User())->findByToken($token)->getFirst()) {
+            return $this->response(200, [
+                'url' => APP_URL . '/checkin/fail/'
+            ]);
+        }
+
+        if (!$checkInId || !$checkIn = (new \app\models\CheckIn())->find($checkInId)->getFirst()) {
             return $this->response(200, [
                 'url' => APP_URL . '/checkin/fail/'
             ]);
         }
 
         return $this->response(200, [
-            'url' => APP_URL . '/checkin/info/'.$token
+            'url' => APP_URL . '/checkin/info/' . $token . '/' . $checkInId
         ]);
     }
 

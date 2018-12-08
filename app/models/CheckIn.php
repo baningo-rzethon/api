@@ -22,7 +22,7 @@ class CheckIn extends Model
      */
     public function findByName(string $name): Database
     {
-        $this->db->query('select * from ' . $this->tableName . ' where name = :name');
+        $this->db->query('select * from `' . $this->tableName . '` where name = :name');
 
         return $this->db->bind(':name', $name);
     }
@@ -33,7 +33,7 @@ class CheckIn extends Model
      */
     public function find(int $id): Database
     {
-        $this->db->query('select * from ' . $this->tableName . ' where id = :id');
+        $this->db->query('select * from `' . $this->tableName . '` where id = :id');
 
         return $this->db->bind(':id', $id);
     }
@@ -44,7 +44,7 @@ class CheckIn extends Model
      */
     public function getPlacesIds(int $checkInId): Database
     {
-        $this->db->query('select place_id from check-ins_places where check-in_id = :checkInId');
+        $this->db->query('select place_id from `check-ins_places` where `check-in_id` = :checkInId');
 
         return $this->db->bind(':checkInId', $checkInId);
     }
