@@ -83,6 +83,37 @@ class Users extends ApiController
         return $this->response(400, $this->errors);
     }
 
+
+    /**
+     * @return bool
+     * /users/token
+     */
+    public function token()
+    {
+        if (!$this->onlyForAdmin()) {
+            return $this->response(400, [
+                'message' => 'Wystąpił nieoczekiwany błąd1!'
+            ]);
+        }
+
+        $model = new UpdateForm($this->request);
+        if ($this->request) {
+            if ($model->updateToken()) {
+                return $this->response(200, [
+                    'message' => 'Sukces!'
+                ]);
+            }
+
+            return $this->response(400, [
+                'message' => 'Wystąpił nieoczekiwany błąd!'
+            ]);
+        }
+
+        return $this->response(400, [
+            'message' => 'Wystąpił nieoczekiwany błąd!'
+        ]);
+    }
+
     /**
      * @return bool
      * /users/destroy

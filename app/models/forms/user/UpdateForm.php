@@ -31,7 +31,7 @@ class UpdateForm extends FormModel
             'user_id',
             'name',
             'password',
-            'confirm'
+            'confirm',
         ]))->validate()->getErrors();
     }
 
@@ -58,5 +58,19 @@ class UpdateForm extends FormModel
         }
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function updateToken()
+    {
+        $this->user = new $this->user;
+
+        return $this->user->db
+            ->query('update users set token = :token where id = :id')
+            ->bind(':token', $this->data->token)
+            ->bind(':id', $this->data->id)
+            ->execute();
     }
 }
