@@ -20,13 +20,10 @@ require_once (new PathProvider())->view('inc/flash');
                 </p>
             </div>
             <div class="col-md-4 text-center pt-5">
-                <h3 class="text-muted pt-3">Ciesz się personalizacją</h3><br>
+                <h3 class="text-muted pt-3">Ciesz się personalizacją, złap nagrody!</h3><br>
                 <img src="https://play.google.com/intl/pl/badges/images/generic/pl_badge_web_generic.png" class="img-fluid" style="height: 50px;">
                 <img src="https://i-invdn-com.akamaized.net/landingPages/mobile_2018/pl/pl-badge-ios.png" class="img-fluid" style="height: 50px;">
             </div>
-
-
-
         </div>
         <div class="row">
             <div class="col-md-4 p-3">
@@ -200,7 +197,7 @@ require_once (new PathProvider())->view('inc/flash');
                                 </div>
 
 
-                                <button class="btn btn-primary btn-lg w-100 mt-3" data-dismiss="modal">Zapisz</button>
+                                <button class="btn btn-primary btn-lg w-100 mt-3" data-dismiss="modal" onclick="recomend()">Zapisz</button>
                             </div>
 
                         </div>
@@ -209,7 +206,7 @@ require_once (new PathProvider())->view('inc/flash');
 
                 <h1 class="pt-5">Warte uwagi w okolicy:</h1>
                 <p class="text-muted">Lista stworzona według Twoich preferencji</p>
-                <ul class="list-group" style="font-size:120%;">
+                <ul class="list-group" style="font-size:120%;" id="recomends">
                     <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00533, 50.03773)">
                         <i class="fas fa-cocktail"></i> Pewex PUB <span class="badge badge-primary">sprawdź</span>
                     </li>
@@ -263,7 +260,7 @@ require_once (new PathProvider())->view('inc/flash');
 
         function markPoint(x, y)
         {
-            document.getElementById("map").innerHTML = "";
+
             map = new OpenLayers.Map("map");
             map.addLayer(new OpenLayers.Layer.OSM());
 
@@ -288,6 +285,8 @@ require_once (new PathProvider())->view('inc/flash');
             zegarek();
             markPoint(22.00489, 50.0375);
         }
+
+
     </script>
 <?php
 require_once (new PathProvider())->view('inc/footer');
