@@ -15,7 +15,7 @@ require_once (new PathProvider())->view('inc/flash');
             </div>
             <div class="col-md-8 text-center pt-5">
                 <p class="text-muted" style="font-size: 200%;" id="watch"></p>
-                <span style="font-size: 400%;">Dzień dobry, <b><?= $data->user->name ?></b>! <a class="btn btn-primary" href="/rzethon/checkin/fail">wyloguj</a></span>
+                <span style="font-size: 400%;">Dzień dobry, <b><?= $data->user->name ?></b>! <a class="btn btn-primary" href="<?= APP_URL ?>/checkin/fail">wyloguj</a></span>
                 <p class="text-muted" style="font-size: 200%;">Odwiedzasz #rzeTour <b><?= $data->checkIn->name ?></b>
                 </p>
 
