@@ -26,23 +26,23 @@ require_once (new PathProvider())->view('inc/flash');
                 <h1>Warte uwagi w okolicy:</h1>
                 <p class="text-muted">Lista stworzona według Twoich preferencji</p>
                 <ul class="list-group" style="font-size:120%;">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00533, 50.03773)">
                         <i class="fas fa-cocktail"></i> Pewex PUB <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00338, 50.03797)">
                         <i class="fas fa-hotel"></i> Hotel pod ratuszem <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fa fa-coffee"></i> Kawa Rzeszowska <span class="badge badge-primary">sprawdź</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00625, 50.03746)">
+                        <i class="fa fa-coffee"></i> Powoli cafe <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fa fa-coffee"></i> Hola Lola <span class="badge badge-primary">sprawdź</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00564, 50.03735)">
+                        <i class="fa fa-coffee"></i> Cukiernia wiedeńska <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00438, 50.03783)">
                         <i class="fas fa-apple-alt"></i>Pizzeria radość <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fas fa-apple-alt"></i>Pizzeria Geronimo <span class="badge badge-primary">sprawdź</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00456, 50.0378)">
+                        <i class="fas fa-apple-alt"></i>Zen sushi <span class="badge badge-primary">sprawdź</span>
                     </li>
                 </ul>
             </div>
@@ -75,23 +75,34 @@ require_once (new PathProvider())->view('inc/flash');
     </script>
     <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
     <script>
-        map = new OpenLayers.Map("map");
-        map.addLayer(new OpenLayers.Layer.OSM());
 
-        var lonLat = new OpenLayers.LonLat(22.00489, 50.0375)
-            .transform(
-                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-                map.getProjectionObject() // to Spherical Mercator Projection
-            );
+        function markPoint(x, y)
+        {
+            document.getElementById("map").innerHTML = "";
+            map = new OpenLayers.Map("map");
+            map.addLayer(new OpenLayers.Layer.OSM());
 
-        var zoom=18;
+            var lonLat = new OpenLayers.LonLat(x,y)
+                .transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    map.getProjectionObject()
+                );
 
-        var markers = new OpenLayers.Layer.Markers( "Markers" );
-        map.addLayer(markers);
+            var zoom = 18;
 
-        markers.addMarker(new OpenLayers.Marker(lonLat));
+            var markers = new OpenLayers.Layer.Markers("Markers");
+            map.addLayer(markers);
 
-        map.setCenter (lonLat, zoom);
+            markers.addMarker(new OpenLayers.Marker(lonLat));
+
+            map.setCenter(lonLat, zoom);
+        }
+
+        function start()
+        {
+            zegarek();
+            markPoint(22.00489, 50.0375);
+        }
     </script>
 <?php
 require_once (new PathProvider())->view('inc/footer');

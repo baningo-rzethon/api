@@ -13,12 +13,20 @@ require_once (new PathProvider())->view('inc/flash');
                 <span class="text-primary display-3 ">#rzeTour</span>
                 <p class="text-muted">Informacje w zasięgu Twojej ręki</p>
             </div>
-            <div class="col-md-8 text-center pt-5">
+            <div class="col-md-4 text-center pt-5">
                 <p class="text-muted" style="font-size: 200%;" id="watch"></p>
                 <span style="font-size: 400%;">Dzień dobry!</span>
                 <p class="text-muted" style="font-size: 200%;">Odwiedzasz #rzeTour <b>Rynek</b>
                 </p>
             </div>
+            <div class="col-md-4 text-center pt-5">
+                <h3 class="text-muted pt-3">Ciesz się personalizacją</h3><br>
+                <img src="https://play.google.com/intl/pl/badges/images/generic/pl_badge_web_generic.png" class="img-fluid" style="height: 50px;">
+                <img src="https://i-invdn-com.akamaized.net/landingPages/mobile_2018/pl/pl-badge-ios.png" class="img-fluid" style="height: 50px;">
+            </div>
+
+
+
         </div>
         <div class="row">
             <div class="col-md-4 p-3">
@@ -202,23 +210,23 @@ require_once (new PathProvider())->view('inc/flash');
                 <h1 class="pt-5">Warte uwagi w okolicy:</h1>
                 <p class="text-muted">Lista stworzona według Twoich preferencji</p>
                 <ul class="list-group" style="font-size:120%;">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00533, 50.03773)">
                         <i class="fas fa-cocktail"></i> Pewex PUB <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00573, 50.03731)">
                         <i class="fas fa-hotel"></i> Hotel amb <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00409, 50.03762)">
                         <i class="fa fa-landmark"></i> Muzeum Historii Miasta Rzeszowa <span
                                 class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00492, 50.03736)">
                         <i class="fas fa-monument"></i> Pomnik Tadeusza Kościuszki <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00399, 50.03734)">
                         <i class="fa fa-landmark"></i> Ratusz <span class="badge badge-primary">sprawdź</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00528, 50.03706)">
                         <i class="fa fa-landmark"></i> Urząd Miasta Rzeszowa <span
                                 class="badge badge-primary">sprawdź</span>
                     </li>
@@ -245,30 +253,41 @@ require_once (new PathProvider())->view('inc/flash');
             let dni = new Array("niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota");
             let miesiace = new Array("stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia");
 
-            var pokazDate = "Dzisiaj jest " + dni[dzienN] + ', ' + dzien + ' ' + miesiace[miesiac] + ' ' + rok + " Godzina " + godzina + ':' + minuta + ':' + sekunda;
+            var pokazDate = "Dzisiaj jest " + dni[dzienN] + ', ' + dzien + ' ' + miesiace[miesiac] + ' ' + rok + "<br>Godzina " + godzina + ':' + minuta + ':' + sekunda;
             document.getElementById("watch").innerHTML = pokazDate;
             setTimeout(zegarek, 1000);
         }
     </script>
     <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
     <script>
-        map = new OpenLayers.Map("map");
-        map.addLayer(new OpenLayers.Layer.OSM());
 
-        var lonLat = new OpenLayers.LonLat(22.00489, 50.0375)
-            .transform(
-                new OpenLayers.Projection("EPSG:4326"),
-                map.getProjectionObject()
-            );
+        function markPoint(x, y)
+        {
+            document.getElementById("map").innerHTML = "";
+            map = new OpenLayers.Map("map");
+            map.addLayer(new OpenLayers.Layer.OSM());
 
-        var zoom = 18;
+            var lonLat = new OpenLayers.LonLat(x,y)
+                .transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    map.getProjectionObject()
+                );
 
-        var markers = new OpenLayers.Layer.Markers("Markers");
-        map.addLayer(markers);
+            var zoom = 18;
 
-        markers.addMarker(new OpenLayers.Marker(lonLat));
+            var markers = new OpenLayers.Layer.Markers("Markers");
+            map.addLayer(markers);
 
-        map.setCenter(lonLat, zoom);
+            markers.addMarker(new OpenLayers.Marker(lonLat));
+
+            map.setCenter(lonLat, zoom);
+        }
+
+        function start()
+        {
+            zegarek();
+            markPoint(22.00489, 50.0375);
+        }
     </script>
 <?php
 require_once (new PathProvider())->view('inc/footer');
