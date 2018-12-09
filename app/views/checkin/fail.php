@@ -5,6 +5,11 @@ use app\core\autoload\PathProvider;
 require_once (new PathProvider())->view('inc/header');
 require_once (new PathProvider())->view('inc/flash');
 ?>
+<style>
+    .custom-control-label{
+        font-size: 130%;
+    }
+</style>
     <div class="container-fluid bg-light" style="min-height: 1000px;">
         <div class="row p-5">
             <div class="col-md-4 text-center">
@@ -228,6 +233,27 @@ require_once (new PathProvider())->view('inc/flash');
                                 class="badge badge-primary">sprawdź</span>
                     </li>
                 </ul>
+
+                <ul class="list-group invisible" style="font-size:120%;" id="recomends2">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00533, 50.03773)">
+                        <i class="fas fa-cocktail"></i> Pewex PUB <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00338, 50.03797)">
+                        <i class="fas fa-hotel"></i> Hotel pod ratuszem <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00625, 50.03746)">
+                        <i class="fa fa-coffee"></i> Powoli cafe <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00564, 50.03735)">
+                        <i class="fa fa-coffee"></i> Cukiernia wiedeńska <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00438, 50.03783)">
+                        <i class="fas fa-apple-alt"></i>Pizzeria radość <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="markPoint(22.00456, 50.0378)">
+                        <i class="fas fa-apple-alt"></i>Zen sushi <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-8" id="map" style="height: 490px;">
             </div>
@@ -284,6 +310,14 @@ require_once (new PathProvider())->view('inc/flash');
         {
             zegarek();
             markPoint(22.00489, 50.0375);
+        }
+
+        function recomend()
+        {
+            document.getElementById("recomends").outerHTML = "";
+
+            var element2 = document.getElementById("recomends2");
+            element2.classList.remove("invisible");
         }
 
 
