@@ -1,8 +1,6 @@
 <?php
 
 use app\core\autoload\PathProvider;
-use app\models\Place;
-use app\models\Thing;
 
 require_once (new PathProvider())->view('inc/header');
 require_once (new PathProvider())->view('inc/flash');
@@ -17,7 +15,7 @@ require_once (new PathProvider())->view('inc/flash');
             </div>
             <div class="col-md-8 text-center pt-5">
                 <p class="text-muted" style="font-size: 200%;" id="watch"></p>
-                <span style="font-size: 400%;">Dzień dobry, <b><?= $data->user->name ?></b>!</span>
+                <span style="font-size: 400%;">Dzień dobry, <b><?= $data->user->name ?></b>! <a class="btn btn-primary" href="/rzethon/checkin/fail">wyloguj</a></span>
                 <p class="text-muted" style="font-size: 200%;">Odwiedzasz #rzeTour <b><?= $data->checkIn->name ?></b>
                 </p>
 
@@ -27,25 +25,28 @@ require_once (new PathProvider())->view('inc/flash');
             <div class="col-md-4 p-5">
                 <h1>Warte uwagi w okolicy:</h1>
                 <p class="text-muted">Lista stworzona według Twoich preferencji</p>
-                <ul class="list-group">
+                <ul class="list-group" style="font-size:120%;">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <i class="fas fa-cocktail"></i> Pewex PUB <span class="badge badge-primary">sprawdź</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fas fa-hotel"></i> Hotel amb <span class="badge badge-primary">sprawdź</span>
+                        <i class="fas fa-hotel"></i> Hotel pod ratuszem <span class="badge badge-primary">sprawdź</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fa fa-landmark"></i> Muzeum Historii Miasta Rzeszowa <span class="badge badge-primary">sprawdź</span>
+                        <i class="fa fa-coffee"></i> Kawa Rzeszowska <span class="badge badge-primary">sprawdź</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fas fa-monument"></i> Pomnik Tadeusza Kościuszki <span class="badge badge-primary">sprawdź</span>
+                        <i class="fa fa-coffee"></i> Hola Lola <span class="badge badge-primary">sprawdź</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="fa fa-landmark"></i> Ratusz <span class="badge badge-primary">sprawdź</span>
+                        <i class="fas fa-apple-alt"></i>Pizzeria radość <span class="badge badge-primary">sprawdź</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="fas fa-apple-alt"></i>Pizzeria Geronimo <span class="badge badge-primary">sprawdź</span>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-8" id="map" style="height: 385px;">
+            <div class="col-md-8" id="map" style="height: 420px;">
 
             </div>
         </div>
