@@ -13,7 +13,7 @@ use app\models\forms\user\LoginForm;
  * Class Oauth
  * /oauth
  */
-class Oauth extends ApiController
+class APIOAuth extends ApiController
 {
     /**
      * @return bool
